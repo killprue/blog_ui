@@ -1,0 +1,98 @@
+<div class="container" style="margin-top:5rem; margin-bottom:5rem;">
+    <form [formGroup]='postForm'>
+        <div class="form-group">
+            <label for="titleInput">Title:</label>
+            <input name="titleInput" type='text' formControlName='title' class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="textareaContent">Content:</label>
+            <textarea formControlName='content' name="textareaContent" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="albumLinkInput"><img src="../../assets/googlePhotos.png" height="25px" width="25px"> Google
+                Album Link:</label>
+            <input name="albumLinkInput" type='text' formControlName='albumLink' class="form-control">
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="datePicker">Date:</label>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="datePicker"
+                            ngbDatepicker #d="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button #buttonEl class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                <fa-icon [icon]="faCalendarDay" size="lg"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <label for="fileInput">Image:</label>
+                <div class="custom-file">
+                    <input name="fileInput" type="file" formControlName='photo' (change)='onFileSelect($event)'
+                        accept="image/png, image/jpeg" class="custom-file-input">
+                    <label class="custom-file-label" for="customFile">{{curFile}}</label>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="form-group mt-5">
+        <label>Location:</label>
+        <hr>
+        <div class="container">
+            <div class="pac-card container" id="pac-card">
+                <div>
+                    <div id="title">
+                        {{ ' ' }}
+                        {{ ' ' }}
+                    </div>
+                    <div id="type-selector" class="pac-controls">
+                        <input type="radio" name="type" id="changetype-all" checked="checked">
+                        <label for="changetype-all" class="mr-1 ml-1">All</label>
+
+                        <input type="radio" name="type" id="changetype-establishment">
+                        <label for="changetype-establishment" class="mr-1 ml-1">Establishments</label>
+
+                        <input type="radio" name="type" id="changetype-address">
+                        <label for="changetype-address" class="mr-1 ml-1">Addresses</label>
+
+                        <input type="radio" name="type" id="changetype-geocode">
+                        <label for="changetype-geocode" class="ml-1">Geocodes</label>
+                    </div>
+                    <div id="strict-bounds-selector" class="pac-controls">
+                        <input type="checkbox" id="use-strict-bounds" value="">
+                        <label for="use-strict-bounds">Strict Bounds</label>
+                    </div>
+                </div>
+
+                <div id="pac-container">
+                    <input #location name="locationInput" id="pac-input" class="form-control" type="text"
+                        placeholder="Enter a location">
+                </div>
+            </div>
+            <div #mapContainer id="map">
+
+            </div>
+            <div id="infowindow-content">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="container form-group mt-5">
+        <div class="row justify-content-between">
+            <button [disabled]="preventResubmit" (click)='createNewPost()' class="btn btn-primary">
+                Create
+            </button>
+            <button [routerLink]="['/posts']" class="btn btn-secondary">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

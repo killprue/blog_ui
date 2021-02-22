@@ -1,0 +1,63 @@
+<div class="container mb-3" style="margin-top:5rem;">
+    <form [formGroup]='emailform'>
+        <div class="container shadow-lg bg-light pt-3 pb-5 pl-5 pr-5">
+            <div class="row justify-content-center mb-5">
+
+                <fa-icon [icon]="faMailBulk" size="3x" style="color:#0275d8"></fa-icon>
+            </div>
+            <div class="row mt-2">
+                <input type='text' formControlName="subject" class="form-control" placeholder='Subject'>
+            </div>
+            <div class=" mt-4 row">
+                <textarea type='text' formControlName="content" placeholder='Content' class="form-control"></textarea>
+            </div>
+            <div class="mt-5 row justify-content-center">
+                <button class="btn btn-primary" (click)="formSubmit()">Send Bulk Email <fa-icon [icon]="faPaperPlane"
+                        size="small"></fa-icon></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container bg-light shadow-lg card p-3" style="margin-bottom:5rem;">
+    <div *ngIf="emails$" class="row">
+        <div class="col-lg-3 col-sm-12" *ngFor="let email of emails$">
+            <div class="card bg-secondary text-white mb-2">
+                <div class="card-text p-1" align="center">
+                    <div>
+                        <p>{{ email.emailAddress }}</p>
+                    </div>
+                    <div>
+                        <p>Subscribed for <span style="color:#ADD8E6;"
+                                class="font-weight-bolder">{{ email.daysSubscribed }} </span> days </p>
+                    </div>
+                    <div class="container ">
+                        <div class="clr-row">
+                            <span *ngIf="email.postSubscribed" class=" mif-map2 mif-2x"><span
+                                    class=" mif-checkmark fg-green mif-1x"></span></span>
+                            <span *ngIf="email.howtoSubscribed" class="icon mif-info mif-2x"><span
+                                    class=" mif-checkmark fg-green mif-1x"></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="emails$.length === 0" class="container">
+            <div class="row justify-content-center">
+                <h4 style="color: white;">
+                    No emails have subscribed yet
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!emails$">
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

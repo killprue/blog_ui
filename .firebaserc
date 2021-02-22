@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "rvawol-admin-9481a": {
+      "hosting": {
+        "rvawol-admin": [
+          "rvawol-admin-9481a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "rvawol-admin": "rvawol-admin-9481a"
+  }
+}
